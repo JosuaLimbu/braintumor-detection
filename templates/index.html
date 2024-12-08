@@ -4,16 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain Tumor Detection</title>
+    <title>Tumor Brain Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
-    <h1>Brain Tumor Detection</h1>
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <label for="file">Select an image:</label><br>
-        <input type="file" name="file" id="file"><br><br>
-        <input type="submit" value="Upload and Detect">
+    <h1>Tumor Brain Detection</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" onchange="previewImage(event)" required>
+        <br><br>
+        <button type="submit" name="predict">Predict</button>
     </form>
+
+    <div class="image-container">
+        <div class="placeholder">Empty</div>
+        <img id="image-preview" src="#" alt="Uploaded Image">
+    </div>
+
+    {% if output_file %}
+    <script>
+        const preview = document.getElementById("image-preview");
+        const placeholder = document.querySelector(".placeholder");
+
+        preview.src = "{{ url_for('static', filename=output_file) }}";
+        preview.style.display = "block";
+        placeholder.style.display = "none";
+    </script>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 
 </html>
