@@ -17,7 +17,11 @@ $ pip install -r requirements.txt
 $ python3 app.py // flask run
 ```
 
-The end result will be like this.
+The end result on mobile will be like this.
+
+![picture](static/img/picture.png)
+
+The end result on desktop will be like this.
 
 ![picture1](static/img/picture1.png)
 ![picture2](static/img/picture2.png)
