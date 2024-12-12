@@ -43,21 +43,14 @@ def index():
     input_file = None
     output_file = None
 
-    url1 = "https://assetsbraintumor.vercel.app/content.html"
-    url2 = "https://assetsbraintumor.vercel.app/information.html"
+    url = "https://assetsbraintumor.vercel.app/content.html"
     
-    response1 = requests.get(url1)
-    if response1.status_code == 200:
-        html_content1 = response1.text
+    response = requests.get(url)
+    if response.status_code == 200:
+        html_content = response.text
     else:
-        html_content1 = "<p>Error fetching content from URL 1</p>"
+        html_content = "<p>Error fetching content from URL 1</p>"
     
-    response2 = requests.get(url2)
-    if response2.status_code == 200:
-        html_content2 = response2.text
-    else:
-        html_content2 = "<p>Error fetching content from URL 2</p>"
-
     if request.method == 'POST':
         if 'file' in request.files:
             file = request.files['file']
@@ -86,7 +79,7 @@ def index():
                     cv2.imwrite(result_path, out.get_image()[:, :, ::-1])
                     output_file = os.path.join('results', result_filename).replace("\\", "/")  
 
-    return render_template('index.html', html_content1=html_content1, html_content2=html_content2, input_file=input_file, output_file=output_file)
+    return render_template('index.html', html_content=html_content, input_file=input_file, output_file=output_file)
 
 if __name__ == '__main__':
     app.run(debug=True)

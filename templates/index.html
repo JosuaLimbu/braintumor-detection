@@ -7,7 +7,6 @@
   <title>Brain Tumor Detection</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- ======== CSS here ======== -->
   <link rel="stylesheet" href="https://braintumorassets.vercel.app/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://braintumorassets.vercel.app/assets/css/lineicons.css">
   <link rel="stylesheet" href="https://braintumorassets.vercel.app/assets/css/animate.css">
@@ -18,64 +17,19 @@
 
 <body>
 
-  {{ html_content1|safe }}
-  <!-- ======== detect-section start ======== -->
-  <section id="detect" class="feature-extended-section pt-50">
-    <div class="feature-extended-wrapper">
-      <div class="container">
-        <div class="justify-content-center" style="position: relative;">
-          <div class="col-xxl-5 col-xl-6 col-lg-8 col-md-9">
-            <div class="section-title text-center mb-20">
-              <h2 class="mb-25 wow fadeInUp" data-wow-delay=".2s">
-                Brain Tumor Detection
-              </h2>
-              <p>
-                Add your MRI Images here
-              </p>
-            </div>
-            <form method="POST" enctype="multipart/form-data" class="upload-form justify-content-center mb-0">
-              <div style="display: flex; justify-content: center; align-items: center;">
-                <label id="file-label" for="file-upload" class="btn btn-primary">Choose Image</label>
-                <input id="file-upload" type="file" name="file" accept="image/*" onchange="previewImage(event)"
-                  required>
+  {{ html_content|safe }}
 
-              </div>
-              <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-                <button type="submit" name="predict" class="btn btn-danger">Predict</button>
-              </div>
+  {% if output_file %}
+  <script>
+    const preview = document.getElementById("image-preview");
+    const placeholder = document.querySelector(".placeholder");
 
+    preview.src = "{{ url_for('static', filename=output_file) }}";
+    preview.style.display = "block";
+    placeholder.style.display = "none";
+  </script>
+  {% endif %}
 
-          </div>
-          </form>
-
-          <div
-            style="display: flex; justify-content: center; align-items: center; margin-top: 20px; width: 100%; max-width: 450px; height: 400px; aspect-ratio: 1; border: 2px dashed #ccc; position: relative; overflow: hidden;">
-            <div class="image-container">
-              <img id="image-preview" alt="Uploaded Image" style="display: none;">
-              <span class="placeholder">Upload your image here</span>
-            </div>
-
-          </div>
-
-          {% if output_file %}
-          <script>
-            const preview = document.getElementById("image-preview");
-            const placeholder = document.querySelector(".placeholder");
-
-            preview.src = "{{ url_for('static', filename=output_file) }}";
-            preview.style.display = "block";
-            placeholder.style.display = "none";
-          </script>
-          {% endif %}
-        </div>
-      </div>
-
-
-    </div>
-    </div>
-  </section>
-  <!-- ======== detect-section end ======== -->
-  {{ html_content2|safe }}
 
   <script src="https://braintumorassets.vercel.app/assets/js/bootstrap.bundle.min.js"></script>
   <script src="https://braintumorassets.vercel.app/assets/js/wow.min.js"></script>
